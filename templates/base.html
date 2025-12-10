@@ -1,4 +1,5 @@
 {% load static %}
+{% load socialaccount %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,7 +68,7 @@
                                     <li><a href="#">About Us</a></li>
                                     <li><a href="#">Contact Us</a></li>
                                     {% if user.is_authenticated %}
-                                    <li><a href="#"><i class="icon-user"></i>{{ user.first_name }} {{ user.last_name }}</a></li>
+                                    <li><a href="#"><i class="icon-user"></i>{{ request.user.email }} {{ user.last_name }}</a></li>
                                     <li><a href="{% url 'logout' %}"><i class="icon-sign-out"></i>Logout</a></li>
                                     {% else %}
                                     <li><a href="#signin-modal" data-toggle="modal"><i class="icon-user"></i>Login</a></li>
@@ -339,14 +340,14 @@
                                                 <label class="custom-control-label" for="signin-remember">Remember Me</label>
                                             </div>
 
-                                            <a href="#" class="forgot-link">Forgot Your Password?</a>
+                                            <a href="{% url 'send_reset' %}" class="forgot-link">Forgot Your Password?</a>
                                         </div>
                                     </form>
                                     <div class="form-choice">
                                         <p class="text-center">or sign in with</p>
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <a href="#" class="btn btn-login btn-g">
+                                                <a href="{% provider_login_url google %}" class="btn btn-login btn-g">
                                                     <i class="icon-google"></i>
                                                     Login With Google
                                                 </a>
